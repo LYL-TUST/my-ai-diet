@@ -26,7 +26,7 @@
 
 ## 环境变量（必填）
 
-后端（`server.js`）需要以下环境变量（不要提交到 GitHub）：
+后端（`server.js`）需要以下环境变量：
 
 - `SPARK_APP_ID`：讯飞星火 AppID
 - `SPARK_API_KEY`：讯飞星火 APIKey
