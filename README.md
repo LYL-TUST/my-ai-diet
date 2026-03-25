@@ -110,13 +110,3 @@ npm run dev
 3. **停止后控制台出现中断类错误**
    - 这是停止生成时 fetch 流被中断的正常现象
    - 已在前端对 Abort 情况做静默处理，避免影响 UI
-
-## GitHub 上传注意事项（很重要）
-
-- 不要提交任何密钥：`SPARK_*` 环境变量、APISecret 等必须留在本地
-- `node_modules/`、`dist/` 已在 `.gitignore` 中忽略
-- 建议仅提交必要代码与文档（`src/`、`server.js`、`vite.config.js`、`package.json`、`README.md` 等）
-
-## 许可协议
-
-如需补充开源协议（MIT / Apache-2.0 等），你可以在仓库创建时补上。当前仓库未指定协议时以默认法律声明为准。
