@@ -9,7 +9,6 @@ const PORT = 3001
 app.use(cors())
 app.use(express.json())
 
-// 星火 Spark Lite API 配置（从你控制台截图提供的信息填到环境变量里）
 // 注意：星火官方 WebSocket 域名是 spark-api.xf-yun.com（带横杠）
 const SPARK_HOST = 'spark-api.xf-yun.com'
 const SPARK_PATH = '/v1.1/chat'
@@ -92,7 +91,6 @@ app.post('/api/chat', async (req, res) => {
                 chat: {
                     domain: 'lite',
                     temperature: 0.5,
-                    // max_tokens 在不同版本有范围限制；先用一个偏保守的值即可
                     max_tokens: 2048
                 }
             },
@@ -158,7 +156,6 @@ app.post('/api/chat', async (req, res) => {
         }, 60000)
 
         // 客户端主动中断（前端 Abort/停止生成）时，关闭上游连接并释放资源
-        // 用 res 事件而不是 req 事件，更符合 SSE 场景（req close 可能会在早期就触发）。
         res.on('close', () => {
             if (!finished) {
                 clearTimeout(timeoutId)
@@ -194,7 +191,6 @@ app.post('/api/chat', async (req, res) => {
                     const contents = extractContents(json)
                     if (contents.length > 0) {
                         for (const content of contents) {
-                            // 标准 SSE：每次增量写入一个 data frame
                             res.write(`data: ${JSON.stringify({ content })}\n\n`)
                             anyContentSent = true
                         }
@@ -208,7 +204,6 @@ app.post('/api/chat', async (req, res) => {
                         return true
                     }
 
-                    // 非 0 code 的情况（鉴权/参数问题）
                     const code = json?.header?.code
                     if (code && code !== 0 && !finished) {
                         clearTimeout(timeoutId)
@@ -228,7 +223,6 @@ app.post('/api/chat', async (req, res) => {
                     return false
                 }
 
-                // 优先：整条消息作为一个 JSON 解析，避免错误地按换行切割 JSON
                 try {
                     const json = JSON.parse(raw)
                     if (handleJson(json)) return
