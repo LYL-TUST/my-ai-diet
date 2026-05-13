@@ -46,12 +46,26 @@
 
 ```plain text
 my-ai-diet/
-├── src/                # Vue3 前端源码（页面、交互、请求封装）
+├── .vscode/                # VSCode 配置文件（可选，不影响项目）
+├── node_modules/           # 前端依赖包（npm 自动生成，不上传仓库）
+├── public/                 # 静态资源目录（图标、静态文件等）
 ├── python/
-│   └── main.py         # FastAPI 后端唯一入口（对接讯飞星火）
-├── .env                # 存放讯飞密钥（已加入.gitignore，不上传仓库）
-├── README.md           # 项目说明文档
-└── package.json        # 前端依赖配置
+│   └── main.py             # ✅ FastAPI 后端主程序（当前唯一生效后端）
+├── src/
+│   ├── assets/             # 项目静态资源（图片、样式等）
+│   ├── composables/        # Vue3 组合式函数目录
+│   │   ├── useChat.js      # ✅ 流式对话核心逻辑（已过滤 [DONE]）
+│   │   └── useStorage.js   # 本地存储相关逻辑
+│   ├── App.vue             # 根组件
+│   ├── main.js             # 前端入口文件
+│   └── style.css           # 全局样式文件
+├── .gitignore              # Git 忽略文件配置（已配置，不上传敏感文件）
+├── index.html              # 项目入口 HTML
+├── package-lock.json       # 依赖版本锁定文件
+├── package.json            # 前端依赖配置文件
+├── README.md               # ✅ 项目说明文档（已更新为纯净版）
+├── server.js               # ❌ 已废弃，可删除（或保留但不再使用）
+└── vite.config.js          # Vite 构建配置文件
 ```
 
 ## 环境准备
